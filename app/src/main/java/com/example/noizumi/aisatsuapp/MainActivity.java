@@ -8,11 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.text.format.DateFormat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,11 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void showTimePickerDialog() {
-        Date date = new Date(System.currentTimeMillis());
-        DateFormat df_h = new SimpleDateFormat("H", Locale.forLanguageTag("ja"));
-        DateFormat df_m = new SimpleDateFormat("m", Locale.forLanguageTag("ja"));
-        int nowHour = Integer.parseInt((df_h.format(date)));
-        int nowMinutes = Integer.parseInt(df_m.format(date));
+        long now = System.currentTimeMillis();
+        // システム時間を取得
+        int nowHour    = Integer.parseInt(DateFormat.format("k",now).toString());
+        int nowMinutes = Integer.parseInt(DateFormat.format("m",now).toString());
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
